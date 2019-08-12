@@ -116,9 +116,9 @@ class CRSpectra:
 
         """
         params = {
-            u"num": element,
-            u"energy_type": energy,
-            u"experiment": experiment,
+            "num": element,
+            "energy_type": energy,
+            "experiment": experiment,
             }
 
         request = requests.get(
