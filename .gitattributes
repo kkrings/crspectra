@@ -1,0 +1,2 @@
+# Treat Jupyter notebooks as Python code.
+*.ipynb linguist-language=Python
