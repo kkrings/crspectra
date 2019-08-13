@@ -7,6 +7,22 @@ see references_. Moreover, it gives access to an `external database`_, which
 includes electrons, positrons, anti-protons, and nuclide up to ``Z = 30`` for
 energies below the cosmic-ray *knee*.
 
+.. note::
+
+   I have created this database in mid of 2017 when I started writing on my PhD
+   thesis. In case you find a publication with newer data, feel free to request
+   its addition.
+
+Installation
+------------
+
+The easiest way to install this project is by using `pip`:
+
+::
+
+   pip install 'https://github.com/kkrings/crspectra#egg=crspectra'
+
+
 Getting started
 ---------------
 
@@ -14,9 +30,9 @@ A measured cosmic-ray energy spectrum can be requested via:
 
 ::
 
-   >>> import crspectra
-   >>> database = crspectra.CRSpectra()
-   >>> spectrum = database.request("Auger")
+   import crspectra
+   database = crspectra.CRSpectra()
+   spectrum = database.request("Auger")
 
 
 A structured *NumPy* array is returned containing the requested cosmic-ray
@@ -30,14 +46,14 @@ The list of available experiments is obtained via:
 
 ::
 
-   >>> experiments = database.experiments
+   experiments = database.experiments
 
 
 Data from the `external database`_ can be requested via:
 
 ::
 
-   >>> spectrum = database.from_external("AMS-02")
+   spectrum = database.from_external("AMS-02")
 
 
 The following plot was created using this package; see the `example`_ *Jupyter*
