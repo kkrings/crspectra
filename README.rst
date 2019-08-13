@@ -1,2 +1,4 @@
-# crspectra
-Database of published cosmic-ray spectra
+crspectra
+=========
+
+Database of published cosmic-ray energy spectra
