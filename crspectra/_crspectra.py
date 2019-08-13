@@ -3,11 +3,11 @@
 """
 import io
 import logging
-import requests
 import sqlite3
 
 import numpy
 import pkg_resources
+import requests
 
 
 class CRSpectra:
