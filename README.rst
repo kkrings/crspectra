@@ -9,11 +9,11 @@ Getting started
 
 A measured cosmic-ray energy spectrum can be requested via:
 
-.. code-block::
+::
 
-   import crspectra
-   database = crspectra.CRSpectra()
-   spectrum = database.request("GAMMA")
+   >>> import crspectra
+   >>> database = crspectra.CRSpectra()
+   >>> spectrum = database.request("GAMMA")
 
 
 A structured *NumPy* array is returned containing the requested cosmic-ray
