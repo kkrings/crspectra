@@ -9,7 +9,7 @@ Getting started
 
 A measured cosmic-ray energy spectrum can be requested via:
 
-::
+.. code-block::
 
    import crspectra
    database = crspectra.CRSpectra()
