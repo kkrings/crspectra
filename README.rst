@@ -2,7 +2,10 @@ Cosmic-ray energy spectra
 =========================
 
 This Python package provides a database of published cosmic-ray energy spectra,
-measured by surface detectors *IceTop* or the *Pierre Auger Observatory*.
+measured by surface detectors like *IceTop* or the *Pierre Auger Observatory*.
+Moreover, it gives access to an `external database`_, which includes electrons,
+positrons, anti-protons, and nuclide up to ``Z = 30`` for energies below the
+cosmic-ray *knee*.
 
 Getting started
 ---------------
@@ -30,16 +33,15 @@ The list of available experiments is obtained via:
    >>> experiments = database.experiments
 
 
-Data from the `external database`_, which includes electrons, positrons,
-anti-protons, and nuclide up to ``Z = 30`` for energies below the cosmic-ray
-*knee*, can be requested via:
+Data from the `external database`_ can be requested via:
 
 ::
 
    >>> spectrum = database.from_external("AMS-02")
 
 
-The following plot was created via this package:
+The following plot was created using this package, see the `example`_ Jupyter
+notebook:
 
 .. figure:: example/crspectra.png
 
@@ -49,3 +51,5 @@ The following plot was created via this package:
 .. Links
 .. _external database:
    http://lpsc.in2p3.fr/crdb/
+.. _example:
+   ./example/crspectra.ipynb
