@@ -14,7 +14,7 @@ energies below the cosmic-ray *knee*.
 Installation
 ------------
 
-The easiest way to install this project is by using `pip`:
+The easiest way to install this project is by using *pip*:
 
 ::
 
