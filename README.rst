@@ -7,8 +7,6 @@ see references_. Moreover, it gives access to an `external database`_, which
 includes electrons, positrons, anti-protons, and nuclide up to ``Z = 30`` for
 energies below the cosmic-ray *knee*.
 
-.. note::
-
    I have created this database in mid of 2017 when I started writing on my PhD
    thesis. In case you find a publication with newer data, feel free to request
    its addition.
