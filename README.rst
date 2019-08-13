@@ -48,8 +48,8 @@ Data from the `external database`_ can be requested via:
 
    spectrum = database.from_external("AMS-02")
 
-The following plot was created using this package; see the `example`_ *Jupyter*
-notebook:
+The following plot was created using this package; see the `example`_ *Jupyter
+Notebook*:
 
 .. figure:: example/crspectra.png
 
