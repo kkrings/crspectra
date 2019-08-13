@@ -40,13 +40,24 @@ Data from the `external database`_ can be requested via:
    >>> spectrum = database.from_external("AMS-02")
 
 
-The following plot was created using this package, see the `example`_ Jupyter
+The following plot was created using this package; see the `example`_ *Jupyter*
 notebook:
 
 .. figure:: example/crspectra.png
 
    Cosmic-ray proton and all-particle energy spectra. Only statistical
    uncertainties are shown.
+
+
+References
+----------
+
+Please cite the following papers when using this database:
+
+   CREAM-I/III
+      Y. S. Yoon et al., The Astrophysical Journal 839.1 (2017), p. 5
+   HAWC
+      R. Alfaro et al., Physical Review D96.12 (2017), p. 12201
 
 .. Links
 .. _external database:
