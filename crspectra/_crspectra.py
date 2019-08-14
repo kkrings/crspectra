@@ -3,6 +3,7 @@
 """
 import io
 import logging
+import os
 import sqlite3
 
 import numpy
@@ -20,7 +21,7 @@ class CRSpectra:
     """
     def __init__(self):
         filename = pkg_resources.resource_filename(
-            "crspectra", "data/crspectra.db")
+            "crspectra", os.path.join("data", "crspectra.db"))
 
         self._database = sqlite3.connect(filename)
 
