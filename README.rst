@@ -95,6 +95,10 @@ KASCADE-Grande
 Tibet-III
    Amenomori et al., The Astrophysical Journal 678 (2008), pp. 1165-1179
 
+
+Notes
+-----
+
    I have created this database in mid of 2017 when I started writing on my PhD
    thesis. In case you find a publication with newer data, feel free to request
    its addition.
