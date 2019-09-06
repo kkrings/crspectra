@@ -13,7 +13,7 @@ Installation
 
 The easiest way to install this project is by using *pip*:
 
-::
+.. code:: bash
 
    pip install 'git+https://github.com/kkrings/crspectra#egg=crspectra'
 
@@ -23,7 +23,7 @@ Getting started
 
 A measured cosmic-ray energy spectrum can be requested via:
 
-::
+.. code:: python
 
    import crspectra
    database = crspectra.CRSpectra()
@@ -38,13 +38,13 @@ uncertainty relative to the flux.
 
 The list of available experiments is obtained via:
 
-::
+.. code:: python
 
    experiments = database.experiments
 
 Data from the `external database`_ can be requested via:
 
-::
+.. code:: python
 
    spectrum = database.from_external("AMS-02")
 
