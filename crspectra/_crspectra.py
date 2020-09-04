@@ -123,7 +123,8 @@ class CRSpectra:
             }
 
         request = requests.get(
-            "http://lpsc.in2p3.fr/cosmic-rays-db/rest.php", params=params)
+            "https://lpsc.in2p3.fr/crdb/_dialog_result.php",
+            params=params)
 
         log = logging.getLogger("crspectra.CRSpectra.from_external")
         log.debug("Request: %s", request.url)
