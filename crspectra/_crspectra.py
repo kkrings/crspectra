@@ -146,8 +146,11 @@ class CRSpectra:
 
         converters = {7: fabs, 9: fabs}
 
+        reqtext = "#" + request.text
+        reqtext = reqtext[:reqtext.rindex("\n")+1] + "#" + reqtext[reqtext.rindex("\n")+1:]
+
         result = numpy.loadtxt(
-            io.StringIO(request.text), dtype, converters=converters,
+            io.StringIO(reqtext), dtype, converters=converters,
             usecols=(3, 6, 7, 8, 9, 10, 15))
 
         return result
