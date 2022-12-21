@@ -337,6 +337,45 @@ files = [
 ]
 
 [[package]]
+name = "types-requests"
+version = "2.28.11.6"
+description = "Typing stubs for requests"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-requests-2.28.11.6.tar.gz", hash = "sha256:8c1b1e6a0b19522b4738063e772dcee82cee1c3646536ccc4eb96f655af2b6c6"},
+    {file = "types_requests-2.28.11.6-py3-none-any.whl", hash = "sha256:48b7c06e3dffc1b6359e1888084a2b97f41b6b63f208c571ddb02ddbc6a892e4"},
+]
+
+[package.dependencies]
+types-urllib3 = "<1.27"
+
+[[package]]
+name = "types-setuptools"
+version = "65.6.0.2"
+description = "Typing stubs for setuptools"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-setuptools-65.6.0.2.tar.gz", hash = "sha256:ad60ccf01d626de9762224448f36c13e0660e863afd6dc11d979b3739a6c7d24"},
+    {file = "types_setuptools-65.6.0.2-py3-none-any.whl", hash = "sha256:2c2b4f756f79778074ce2d21f745aa737b12160d9f8dfa274f47a7287c7a2fee"},
+]
+
+[[package]]
+name = "types-urllib3"
+version = "1.26.25.4"
+description = "Typing stubs for urllib3"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-urllib3-1.26.25.4.tar.gz", hash = "sha256:eec5556428eec862b1ac578fb69aab3877995a99ffec9e5a12cf7fbd0cc9daee"},
+    {file = "types_urllib3-1.26.25.4-py3-none-any.whl", hash = "sha256:ed6b9e8a8be488796f72306889a06a3fc3cb1aa99af02ab8afb50144d7317e49"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.4.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -368,4 +407,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1"
-content-hash = "8cc13b163ec4f132aa99151fadd82ed5e76841d0465fa7cf53b26f1d96f1a698"
+content-hash = "669fbaf50b6c0767c15096fbcfe3306ebffde903eb984296c9a6bcf1aa7a100a"

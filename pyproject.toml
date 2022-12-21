@@ -17,6 +17,11 @@ black = "^22.12.0"
 isort = "^5.11.3"
 mypy = "^0.991"
 
+
+[tool.poetry.group.stubs.dependencies]
+types-setuptools = "^65.6.0.2"
+types-requests = "^2.28.11.6"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
