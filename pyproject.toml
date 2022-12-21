@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "crspectra"
+version = "0.1.0"
+description = "Cosmic-ray energy spectra"
+authors = ["Kai Krings <kai.krings@posteo.de>"]
+license = "GPL-3.0"
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+numpy = "^1.24.0"
+requests = "^2.28.0"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+black = "^22.12.0"
+isort = "^5.11.3"
+mypy = "^0.991"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = 'black'

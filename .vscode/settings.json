@@ -1,4 +1,16 @@
 {
     "editor.renderWhitespace": "all",
-    "editor.rulers": [88]
+    "editor.rulers": [
+        88
+    ],
+    "isort.path": [
+        ".venv/bin/isort"
+    ],
+    "python.defaultInterpreterPath": ".venv/bin/python",
+    "python.formatting.blackPath": ".venv/bin/black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": ".venv/bin/flake8",
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyPath": ".venv/bin/mypy",
+    "python.linting.pylintEnabled": false
 }

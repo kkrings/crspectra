@@ -3,8 +3,8 @@
 	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/poetry:1": {}
-	}
-	// "postCreateCommand": "pip3 install --user -r requirements.txt",
+	},
+	"postCreateCommand": "poetry config virtualenvs.in-project true && poetry install"
 	// "customizations": {},
 	// "remoteUser": "root"
 }
