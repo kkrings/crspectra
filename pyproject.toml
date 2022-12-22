@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "crspectra"
 version = "0.1.0"
-description = "Cosmic-ray energy spectra"
+description = "Database of published cosmic-ray energy spectra"
 authors = ["Kai Krings <kai.krings@posteo.de>"]
-license = "GPL-3.0"
+license = "GPL-3.0-only"
 readme = "README.rst"
+repository = "https://github.com/kkrings/crspectra"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
