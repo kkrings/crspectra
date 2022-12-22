@@ -17,6 +17,7 @@ flake8 = "^6.0.0"
 black = "^22.12.0"
 isort = "^5.11.3"
 mypy = "^0.991"
+pre-commit = "^2.20.0"
 
 
 [tool.poetry.group.stubs.dependencies]
