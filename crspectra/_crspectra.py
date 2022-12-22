@@ -19,9 +19,11 @@ class CRSpectra:
     Observatory.
 
     """
+
     def __init__(self):
         filename = pkg_resources.resource_filename(
-            "crspectra", os.path.join("data", "crspectra.db"))
+            "crspectra", os.path.join("data", "crspectra.db")
+        )
 
         self._database = sqlite3.connect(filename)
 
@@ -59,24 +61,24 @@ class CRSpectra:
         values = [
             (row[0], row[1], (row[2], row[3]), (row[4], row[5]), bool(row[6]))
             for row in table
-            ]
+        ]
 
         dtype = [
             ("energy", numpy.float64),
             ("flux", numpy.float64),
-            ("stat", numpy.float64, (2, )),
-            ("sys", numpy.float64, (2, )),
-            ("uplim", numpy.bool)
-            ]
+            ("stat", numpy.float64, (2,)),
+            ("sys", numpy.float64, (2,)),
+            ("uplim", numpy.bool),
+        ]
 
         return numpy.array(values, dtype=dtype)
 
     @property
     def experiments(self):
-        """list(str): Available data
-        """
+        """list(str): Available data"""
         experiments = self._database.execute(
-            "SELECT name FROM sqlite_master WHERE type = 'table'")
+            "SELECT name FROM sqlite_master WHERE type = 'table'"
+        )
 
         return [name for name, in experiments]
 
@@ -120,11 +122,11 @@ class CRSpectra:
             "num": element,
             "energy_type": energy,
             "experiment": experiment,
-            }
+        }
 
         request = requests.get(
-            "https://lpsc.in2p3.fr/crdb/_dialog_result.php",
-            params=params)
+            "https://lpsc.in2p3.fr/crdb/_dialog_result.php", params=params
+        )
 
         log = logging.getLogger("crspectra.CRSpectra.from_external")
         log.debug("Request: %s", request.url)
@@ -136,10 +138,10 @@ class CRSpectra:
         dtype = [
             ("energy", numpy.float64),
             ("flux", numpy.float64),
-            ("stat", numpy.float64, (2, )),
-            ("sys", numpy.float64, (2, )),
-            ("uplim", numpy.bool)
-            ]
+            ("stat", numpy.float64, (2,)),
+            ("sys", numpy.float64, (2,)),
+            ("uplim", numpy.bool),
+        ]
 
         def fabs(s):
             return numpy.fabs(float(s))
@@ -147,10 +149,17 @@ class CRSpectra:
         converters = {7: fabs, 9: fabs}
 
         reqtext = "#" + request.text
-        reqtext = reqtext[:reqtext.rindex("\n")+1] + "#" + reqtext[reqtext.rindex("\n")+1:]
+        reqtext = (
+            reqtext[: reqtext.rindex("\n") + 1]
+            + "#"
+            + reqtext[reqtext.rindex("\n") + 1 :]
+        )
 
         result = numpy.loadtxt(
-            io.StringIO(reqtext), dtype, converters=converters,
-            usecols=(3, 6, 7, 8, 9, 10, 15))
+            io.StringIO(reqtext),
+            dtype,
+            converters=converters,
+            usecols=(3, 6, 7, 8, 9, 10, 15),
+        )
 
         return result
