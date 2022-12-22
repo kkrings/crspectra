@@ -5,6 +5,7 @@ import io
 import logging
 import os
 import sqlite3
+import typing
 
 import numpy
 import pkg_resources
@@ -20,18 +21,18 @@ class CRSpectra:
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         filename = pkg_resources.resource_filename(
             "crspectra", os.path.join("data", "crspectra.db")
         )
 
         self._database = sqlite3.connect(filename)
 
-    def __del__(self):
+    def __del__(self) -> None:
         # Close connection to database.
         self._database.close()
 
-    def request(self, experiment):
+    def request(self, experiment: str) -> numpy.ndarray:
         """Request cosmic-ray energy spectrum.
 
         Parameters
@@ -64,17 +65,17 @@ class CRSpectra:
         ]
 
         dtype = [
-            ("energy", numpy.float64),
-            ("flux", numpy.float64),
-            ("stat", numpy.float64, (2,)),
-            ("sys", numpy.float64, (2,)),
-            ("uplim", numpy.bool),
+            ("energy", float),
+            ("flux", float),
+            ("stat", float, (2,)),
+            ("sys", float, (2,)),
+            ("uplim", bool),
         ]
 
         return numpy.array(values, dtype=dtype)
 
     @property
-    def experiments(self):
+    def experiments(self) -> list[str]:
         """list(str): Available data"""
         experiments = self._database.execute(
             "SELECT name FROM sqlite_master WHERE type = 'table'"
@@ -83,7 +84,7 @@ class CRSpectra:
         return [name for name, in experiments]
 
     @staticmethod
-    def from_external(experiment, element="C", energy="EKN"):
+    def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:
         """Request cosmic-ray energy spectrum from external database.
 
         The database's address is http://lpsc.in2p3.fr/crdb.
@@ -136,17 +137,17 @@ class CRSpectra:
         log.debug("Content:\n%s", request.text)
 
         dtype = [
-            ("energy", numpy.float64),
-            ("flux", numpy.float64),
-            ("stat", numpy.float64, (2,)),
-            ("sys", numpy.float64, (2,)),
-            ("uplim", numpy.bool),
+            ("energy", float),
+            ("flux", float),
+            ("stat", float, (2,)),
+            ("sys", float, (2,)),
+            ("uplim", bool),
         ]
 
-        def fabs(s):
+        def fabs(s: str) -> float:
             return numpy.fabs(float(s))
 
-        converters = {7: fabs, 9: fabs}
+        converters: dict[str | int, typing.Callable[[str], float]] = {7: fabs, 9: fabs}
 
         reqtext = "#" + request.text
         reqtext = (
