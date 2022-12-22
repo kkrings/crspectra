@@ -56,7 +56,7 @@ class CRSpectra:
         energy unit is GeV per nucleon.
 
         """
-        table = self._database.execute("SELECT * from '{}'".format(experiment))
+        table = self._database.execute(f"SELECT * from '{experiment}'")
 
         values = [
             (row[0], row[1], (row[2], row[3]), (row[4], row[5]), bool(row[6]))
@@ -129,7 +129,7 @@ class CRSpectra:
         )
 
         log = logging.getLogger("crspectra.CRSpectra.from_external")
-        log.debug("Request: %s", request.url)
+        log.debug(f"Request: {request.url}")
 
         request.raise_for_status()
 
