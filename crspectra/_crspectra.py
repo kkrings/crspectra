@@ -125,16 +125,14 @@ class CRSpectra:
             "experiment": experiment,
         }
 
-        request = requests.get(
-            "https://lpsc.in2p3.fr/crdb/_dialog_result.php", params=params
-        )
+        response = requests.get("http://lpsc.in2p3.fr/crdb/rest.php", params=params)
 
         log = logging.getLogger("crspectra.CRSpectra.from_external")
-        log.debug(f"Request: {request.url}")
+        log.debug(f"Request: {response.url}")
 
-        request.raise_for_status()
+        response.raise_for_status()
 
-        log.debug("Content:\n%s", request.text)
+        log.debug(f"Content:\n{response.text}")
 
         dtype = [
             ("energy", float),
@@ -149,15 +147,10 @@ class CRSpectra:
 
         converters: dict[str | int, typing.Callable[[str], float]] = {7: fabs, 9: fabs}
 
-        reqtext = "#" + request.text
-        reqtext = (
-            reqtext[: reqtext.rindex("\n") + 1]
-            + "#"
-            + reqtext[reqtext.rindex("\n") + 1 :]
-        )
+        response_text = "\n".join(response.text.split("\n")[1:-1])
 
         result = numpy.loadtxt(
-            io.StringIO(reqtext),
+            io.StringIO(response_text),
             dtype,
             converters=converters,
             usecols=(3, 6, 7, 8, 9, 10, 15),
