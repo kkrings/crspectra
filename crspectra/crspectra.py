@@ -77,7 +77,11 @@ class CRSpectra(collections.abc.Mapping[str, numpy.ndarray]):
 
     def __len__(self) -> int:
         """int: Number of available cosmic-ray energy spectra"""
-        return len(tuple(iter(self)))
+        size = self._connection.execute(
+            "SELECT count() FROM sqlite_master WHERE type = 'table'"
+        )
+
+        return size.fetchone()[0]
 
     @staticmethod
     def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:
