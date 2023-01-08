@@ -4,7 +4,7 @@
 
 import contextlib
 import logging
-import pathlib
+import os
 import sqlite3
 import typing
 
@@ -14,12 +14,8 @@ from crspectra.crspectra import CRSpectra
 
 
 @contextlib.contextmanager
-def connect(filepath: str | None = None) -> typing.Iterator[CRSpectra]:
+def connect() -> typing.Iterator[CRSpectra]:
     """Connect to cosmic-ray energy spectra database
-
-    filepath : str, optional
-        Path to SQLite database of cosmic-ray energy spectra;
-        if `None`, the internal database is used.
 
     Yields
     ------
@@ -27,19 +23,10 @@ def connect(filepath: str | None = None) -> typing.Iterator[CRSpectra]:
         Instance of `CRSpectra` connected to the given database of
         cosmic-ray energy spectra
 
-    Note
-    ----
-    A `filepath` of other than `None` is mostly intended for unit
-    testing.
-
     """
-    database: str
-    if filepath is None:
-        database = pkg_resources.resource_filename(
-            "crspectra", resource_name=str(pathlib.Path("data", "crspectra.db"))
-        )
-    else:
-        database = filepath
+    database = pkg_resources.resource_filename(
+        "crspectra", os.path.join("data", "crspectra.db")
+    )
 
     log = logging.getLogger("crspectra.connect")
     log.debug(f"Database: {database}")
