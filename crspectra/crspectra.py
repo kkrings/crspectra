@@ -1,4 +1,4 @@
-"""Published cosmic-ray energy spectra
+"""Cosmic-ray energy spectra database
 
 """
 
@@ -14,23 +14,10 @@ import requests
 class CRSpectra:
     """Cosmic-ray energy spectra database
 
-    The database contains published cosmic-ray energy spectra from
-    various experiments, e.g. CREAM, IceTop or the Pierre Auger
-    Observatory.
-
     Parameters
     ----------
     connection : Connection
         Connection to cosmic-ray energy spectra database
-
-    Examples
-    --------
-    Connect to cosmic-ray energy spectra database.
-
-    >>> import crspectra
-    ... with crspectra.connect() as database:
-    ...     # Do something with database.
-    ...     ...
 
     """
 
