@@ -2,6 +2,7 @@
 
 """
 
+import collections.abc
 import io
 import logging
 import sqlite3
@@ -11,7 +12,7 @@ import numpy
 import requests
 
 
-class CRSpectra:
+class CRSpectra(collections.abc.Mapping[str, numpy.ndarray]):
     """Cosmic-ray energy spectra database
 
     Parameters
@@ -24,7 +25,7 @@ class CRSpectra:
     def __init__(self, connection: sqlite3.Connection) -> None:
         self._connection = connection
 
-    def request(self, experiment: str) -> numpy.ndarray:
+    def __getitem__(self, experiment: str) -> numpy.ndarray:
         """Request cosmic-ray energy spectrum.
 
         Parameters
@@ -66,14 +67,17 @@ class CRSpectra:
 
         return numpy.array(values, dtype=dtype)
 
-    @property
-    def experiments(self) -> list[str]:
-        """list(str): Available data"""
+    def __iter__(self) -> typing.Iterator[str]:
+        """iterator(str): Available cosmic-ray energy spectra"""
         experiments = self._connection.execute(
             "SELECT name FROM sqlite_master WHERE type = 'table'"
         )
 
-        return [name for name, in experiments]
+        return (name for name, in experiments)
+
+    def __len__(self) -> int:
+        """int: Number of available cosmic-ray energy spectra"""
+        return len(tuple(iter(self)))
 
     @staticmethod
     def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:

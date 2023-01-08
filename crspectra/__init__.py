@@ -8,13 +8,14 @@ Examples
 Connect to the cosmic-ray energy spectra database.
 
 >>> import crspectra
-... with crspectra.connect() as database:
-...     # Obtain list of available experiments.
-...     database.experiments
-...     # Request cosmic-ray energy spectrum.
-...     database.request("Auger")
-...     # Request data from external database.
-...     database.from_external("AMS-02")
+>>> with crspectra.connect() as database:
+...     for experiment in database:
+...         spectrum = database[experiment]
+
+Request data from external database.
+
+>>> import crspectra
+>>> spectrum = crspectra.CRSpectra.from_external("AMS-02")
 
 
 """

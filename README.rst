@@ -21,14 +21,15 @@ The easiest way to install this project is by using *pip*:
 Getting started
 ---------------
 
-A measured cosmic-ray energy spectrum can be requested via:
+The measured cosmic-ray energy spectra can be requested via:
 
 .. code:: python
 
    import crspectra
 
    with crspectra.connect() as database:
-      spectrum = database.request("Auger")
+      for experiment in database:
+         spectrum = database[experiment]
 
 A structured *NumPy* array is returned containing the requested cosmic-ray
 data. The fields are ``energy``, ``flux``, statistical ``stat`` and
@@ -36,12 +37,6 @@ systematical ``sys`` uncertainty on the flux, and uncertainty is upper a
 limit ``uplim``. The energy is given in ``GeV`` and the flux is given
 in ``GeV^-1 m^-2 s^-1 sr^-1``. The uncertainties describe the lower and upper
 uncertainty relative to the flux.
-
-The list of available experiments is obtained via:
-
-.. code:: python
-
-   experiments = database.experiments
 
 Data from the `external database`_ can be requested via:
 
