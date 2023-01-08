@@ -26,8 +26,8 @@ A measured cosmic-ray energy spectrum can be requested via:
 .. code:: python
 
    import crspectra
-   database = crspectra.CRSpectra()
-   spectrum = database.request("Auger")
+   with crspectra.connect() as database:
+      spectrum = database.request("Auger")
 
 A structured *NumPy* array is returned containing the requested cosmic-ray
 data. The fields are ``energy``, ``flux``, statistical ``stat`` and
