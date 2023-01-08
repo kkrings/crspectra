@@ -10,7 +10,7 @@ import typing
 
 import pkg_resources
 
-from crspectra._crspectra import CRSpectra
+from crspectra.crspectra import CRSpectra
 
 
 @contextlib.contextmanager
