@@ -1,36 +1,41 @@
 """Published cosmic-ray energy spectra
 
 """
+
 import io
 import logging
-import os
 import sqlite3
 import typing
 
 import numpy
-import pkg_resources
 import requests
 
 
 class CRSpectra:
-    """Cosmic-ray spectra database
+    """Cosmic-ray energy spectra database
 
     The database contains published cosmic-ray energy spectra from
     various experiments, e.g. CREAM, IceTop or the Pierre Auger
     Observatory.
 
+    Parameters
+    ----------
+    connection : Connection
+        Connection to cosmic-ray energy spectra database
+
+    Examples
+    --------
+    Connect to cosmic-ray energy spectra database.
+
+    >>> import crspectra
+    ... with crspectra.connect() as database:
+    ...     # Do something with database.
+    ...     ...
+
     """
 
-    def __init__(self) -> None:
-        filename = pkg_resources.resource_filename(
-            "crspectra", os.path.join("data", "crspectra.db")
-        )
-
-        self._database = sqlite3.connect(filename)
-
-    def __del__(self) -> None:
-        # Close connection to database.
-        self._database.close()
+    def __init__(self, connection: sqlite3.Connection) -> None:
+        self._connection = connection
 
     def request(self, experiment: str) -> numpy.ndarray:
         """Request cosmic-ray energy spectrum.
@@ -57,7 +62,7 @@ class CRSpectra:
         energy unit is GeV per nucleon.
 
         """
-        table = self._database.execute(f"SELECT * from '{experiment}'")
+        table = self._connection.execute(f"SELECT * from '{experiment}'")
 
         values = [
             (row[0], row[1], (row[2], row[3]), (row[4], row[5]), bool(row[6]))
@@ -77,7 +82,7 @@ class CRSpectra:
     @property
     def experiments(self) -> list[str]:
         """list(str): Available data"""
-        experiments = self._database.execute(
+        experiments = self._connection.execute(
             "SELECT name FROM sqlite_master WHERE type = 'table'"
         )
 
