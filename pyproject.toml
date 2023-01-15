@@ -18,12 +18,14 @@ black = "^22.12.0"
 isort = "^5.11.3"
 mypy = "^0.991"
 pre-commit = "^2.20.0"
+pytest = "^7.2.1"
 
-
-[tool.poetry.group.stubs.dependencies]
+[tool.poetry.group.mypy.dependencies]
 types-setuptools = "^65.6.0.2"
 types-requests = "^2.28.11.6"
 
+[tool.poetry.group.pytest.dependencies]
+pytest-mock = "^3.10.0"
 
 [tool.poetry.group.notebook.dependencies]
 matplotlib = "^3.6.2"
