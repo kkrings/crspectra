@@ -113,7 +113,7 @@ def response(spectrum: numpy.ndarray) -> FakeResponse:
 
     text = "\n".join(line(row) for row in spectrum)
 
-    return FakeResponse(text=f"<code>\n{text}\n</code>")
+    return FakeResponse(text=f"<html><body><p>\n{text}\n</p></body></html>")
 
 
 @pytest.fixture
