@@ -53,7 +53,7 @@ def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:
 
     response = requests.get("http://lpsc.in2p3.fr/crdb/rest.php", params=params)
 
-    log = logging.getLogger("crspectra.CRSpectra.from_external")
+    log = logging.getLogger("crspectra.from_external")
     log.debug(f"Request: {response.url}")
 
     response.raise_for_status()
