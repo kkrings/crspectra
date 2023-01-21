@@ -7,12 +7,12 @@ import pytest
 import pytest_mock
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def experiment() -> str:
     return "some experiment"
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def spectrum() -> numpy.ndarray:
     values = [
         (1e3, 1e-3, (0.5e-4, 0.5e-4), (0.25e-4, 0.25e-4), False),
@@ -31,18 +31,18 @@ def spectrum() -> numpy.ndarray:
     return numpy.array(values, dtype=dtype)
 
 
-@pytest.fixture
-def database(tmp_path: pathlib.Path) -> pathlib.Path:
-    return tmp_path / "crspectra.db"
+@pytest.fixture(scope="session")
+def database(tmp_path_factory: pytest.TempPathFactory) -> pathlib.Path:
+    return tmp_path_factory.mktemp("database") / "crspectra.db"
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def connection(database: pathlib.Path) -> typing.Iterator[sqlite3.Connection]:
     with sqlite3.connect(database) as connection:
         yield connection
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def insert_experiment(
     connection: sqlite3.Connection, experiment: str, spectrum: numpy.ndarray
 ) -> None:
