@@ -1,6 +1,8 @@
+import dataclasses
 import pathlib
 import sqlite3
 import typing
+import unittest.mock
 
 import numpy
 import pytest
@@ -82,5 +84,42 @@ def insert_experiment(
 def mock_pkg_resources_resource_filename(
     mocker: pytest_mock.MockerFixture, database: pathlib.Path
 ) -> None:
-    resource_filename = mocker.patch("pkg_resources.resource_filename")
-    resource_filename.return_value = str(database)
+    resource_filename_mock = mocker.patch("pkg_resources.resource_filename")
+    resource_filename_mock.return_value = str(database)
+
+
+@dataclasses.dataclass(frozen=True)
+class FakeResponse:
+    text: str
+    url = ""
+
+    def raise_for_status(self) -> None:
+        ...
+
+
+@pytest.fixture(scope="session")
+def response(spectrum: numpy.ndarray) -> FakeResponse:
+    def line(row: numpy.ndarray) -> str:
+        values = ["0.0"] * 16
+        values[3] = f"{row['energy']:e}"
+        values[6] = f"{row['flux']:e}"
+        values[7] = f"-{row['stat'][0]:e}"
+        values[8] = f"{row['stat'][1]:e}"
+        values[9] = f"-{row['sys'][0]:e}"
+        values[10] = f"{row['sys'][1]:e}"
+        values[15] = f"{int(row['uplim']):.0f}"
+
+        return " ".join(values)
+
+    text = "\n".join(line(row) for row in spectrum)
+
+    return FakeResponse(text=f"<code>\n{text}\n</code>")
+
+
+@pytest.fixture
+def mock_requests_get(
+    mocker: pytest_mock.MockerFixture, response: FakeResponse
+) -> unittest.mock.MagicMock:
+    get_mock = mocker.patch("requests.get")
+    get_mock.return_value = response
+    return get_mock
