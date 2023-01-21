@@ -11,6 +11,10 @@ class TestCRSpectra:
     def test_getitem(self, getitem: numpy.ndarray, spectrum: numpy.ndarray) -> None:
         assert numpy.all(getitem == spectrum)
 
+    def test_getitem_key_error(self, spectra: crspectra.CRSpectra) -> None:
+        with pytest.raises(KeyError):
+            spectra["not_existing_experiment"]
+
     def test_iter(self, spectra: crspectra.CRSpectra, experiment: str) -> None:
         assert list(spectra.keys()) == [experiment]
 

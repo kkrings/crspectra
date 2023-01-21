@@ -47,7 +47,10 @@ class CRSpectra(collections.abc.Mapping[str, numpy.ndarray]):
         energy unit is GeV per nucleon.
 
         """
-        table = self._connection.execute(f"SELECT * from '{experiment}'")
+        try:
+            table = self._connection.execute(f"SELECT * from '{experiment}'")
+        except sqlite3.OperationalError:
+            raise KeyError(f"Experiment '{experiment}' not found")
 
         values = [
             (row[0], row[1], (row[2], row[3]), (row[4], row[5]), bool(row[6]))
