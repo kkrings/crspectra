@@ -71,7 +71,10 @@ def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:
     def fabs(s: str) -> float:
         return numpy.fabs(float(s))
 
-    converters: dict[str | int, typing.Callable[[str], float]] = {7: fabs, 9: fabs}
+    converters: typing.Dict[typing.Union[str, int], typing.Callable[[str], float]] = {
+        7: fabs,
+        9: fabs,
+    }
 
     response_text = "\n".join(response.text.split("\n")[1:-1])
 
