@@ -83,9 +83,11 @@ def insert_experiment(
 @pytest.fixture
 def mock_pkg_resources_resource_filename(
     mocker: pytest_mock.MockerFixture, database: pathlib.Path
-) -> None:
+) -> unittest.mock.MagicMock:
     resource_filename_mock = mocker.patch("pkg_resources.resource_filename")
     resource_filename_mock.return_value = str(database)
+
+    return resource_filename_mock
 
 
 @dataclasses.dataclass(frozen=True)
@@ -122,4 +124,5 @@ def mock_requests_get(
 ) -> unittest.mock.MagicMock:
     get_mock = mocker.patch("requests.get")
     get_mock.return_value = response
+
     return get_mock

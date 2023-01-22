@@ -1,4 +1,6 @@
+import os
 import typing
+import unittest.mock
 
 import numpy
 import pytest
@@ -6,7 +8,7 @@ import pytest
 import crspectra
 
 
-@pytest.mark.usefixtures("insert_experiment", "mock_pkg_resources_resource_filename")
+@pytest.mark.usefixtures("insert_experiment")
 class TestCRSpectra:
     def test_getitem(self, getitem: numpy.ndarray, spectrum: numpy.ndarray) -> None:
         assert numpy.all(getitem == spectrum)
@@ -22,8 +24,14 @@ class TestCRSpectra:
         assert len(spectra) == 1
 
     @pytest.fixture
-    def spectra(self) -> typing.Iterator[crspectra.CRSpectra]:
+    def spectra(
+        self, mock_pkg_resources_resource_filename: unittest.mock.MagicMock
+    ) -> typing.Iterator[crspectra.CRSpectra]:
         with crspectra.connect() as database:
+            mock_pkg_resources_resource_filename.assert_called_once_with(
+                "crspectra", os.path.join("data", "crspectra.db")
+            )
+
             yield database
 
     @pytest.fixture
