@@ -1,6 +1,6 @@
 {
 	"name": "crspectra",
-	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.8",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/poetry:1": {}
 	},

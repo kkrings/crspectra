@@ -2,14 +2,13 @@
 
 """
 
-import collections.abc
 import sqlite3
 import typing
 
 import numpy
 
 
-class CRSpectra(collections.abc.Mapping[str, numpy.ndarray]):
+class CRSpectra(typing.Mapping[str, numpy.ndarray]):
     """Cosmic-ray energy spectra database
 
     Parameters
