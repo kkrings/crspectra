@@ -37,17 +37,17 @@ jobs:
     - name: Test with pytest
       run: |
         poetry run pytest
-      if: ${{ matrix.python-version != "3.11" }}
+      if: ${{ matrix.python-version != '3.11' }}
     - name: Test with pytest
       run: |
         poetry run coverage run --source=crspectra --branch -m pytest
-      if: ${{ matrix.python-version == "3.11" }}
+      if: ${{ matrix.python-version == '3.11' }}
     - name: Create coverage report
       run: |
         poetry run coverage html
-      if: ${{ matrix.python-version == "3.11" }}
+      if: ${{ matrix.python-version == '3.11' }}
     - uses: actions/upload-artifact@v3
       with:
         name: coverage
         path: htmlcov
-      if: ${{ matrix.python-version == "3.11" }}
+      if: ${{ matrix.python-version == '3.11' }}
