@@ -1,4 +1,4 @@
-name: Execute example notebook
+name: Example notebook
 on:
   workflow_dispatch:
   pull_request:
@@ -8,14 +8,14 @@ on:
     branches:
     - "dev"
 jobs:
-  nbconvert:
+  example:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: "3.8"
+        python-version: "3.11"
     - name: Install poetry
       run: |
         curl -sSL https://install.python-poetry.org | python -
@@ -31,4 +31,5 @@ jobs:
           --execute example/crspectra.ipynb
     - uses: actions/upload-artifact@v3
       with:
+        name: example
         path: example/crspectra.png
