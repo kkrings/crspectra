@@ -1,0 +1,31 @@
+name: Execute example notebook
+on:
+  pull_request:
+    branches:
+    - "main"
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - name: Install poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python -
+        poetry --version
+    - name: Install dependencies with poetry
+      run: |
+        poetry install
+    - name: Execute crspectra.ipynb with nbconvert
+      run: |
+        poetry run jupyter nbconvert \
+          --to notebook \
+          --inplace \
+          --execute example/crspectra.ipynb
+    - uses: actions/upload-artifact@v3
+      with:
+        name: example
+        path: example/crspectra.png

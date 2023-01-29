@@ -15,19 +15,21 @@ The easiest way to install this project is by using *pip*:
 
 .. code:: bash
 
-   pip install 'git+https://github.com/kkrings/crspectra.git@legacy#egg=crspectra'
+   pip install crspectra
 
 
 Getting started
 ---------------
 
-A measured cosmic-ray energy spectrum can be requested via:
+The measured cosmic-ray energy spectra can be requested via:
 
 .. code:: python
 
    import crspectra
-   database = crspectra.CRSpectra()
-   spectrum = database.request("Auger")
+
+   with crspectra.connect() as database:
+      for experiment in database:
+         spectrum = database[experiment]
 
 A structured *NumPy* array is returned containing the requested cosmic-ray
 data. The fields are ``energy``, ``flux``, statistical ``stat`` and
@@ -36,25 +38,16 @@ limit ``uplim``. The energy is given in ``GeV`` and the flux is given
 in ``GeV^-1 m^-2 s^-1 sr^-1``. The uncertainties describe the lower and upper
 uncertainty relative to the flux.
 
-The list of available experiments is obtained via:
-
-.. code:: python
-
-   experiments = database.experiments
-
 Data from the `external database`_ can be requested via:
 
 .. code:: python
 
-   spectrum = database.from_external("AMS-02")
+   spectrum = crspectra.from_external("AMS-02")
 
 The following plot was created using this package; see the `example`_ *Jupyter
 Notebook*:
 
-.. figure:: example/crspectra.png
-
-   Cosmic-ray proton and all-particle energy spectra. Only statistical
-   uncertainties are shown.
+.. figure:: https://github.com/kkrings/crspectra/raw/main/example/crspectra.png
 
 
 .. _references:
@@ -108,4 +101,4 @@ Notes
 .. _external database:
    http://lpsc.in2p3.fr/crdb/
 .. _example:
-   ./example/crspectra.ipynb
+   https://github.com/kkrings/crspectra/blob/main/example/crspectra.ipynb

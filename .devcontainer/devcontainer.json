@@ -1,0 +1,10 @@
+{
+	"name": "crspectra",
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.8",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/poetry:1": {}
+	},
+	"postCreateCommand": "poetry config virtualenvs.in-project true && poetry install"
+	// "customizations": {},
+	// "remoteUser": "root"
+}

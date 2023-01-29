@@ -1,0 +1,52 @@
+name: Lint, type check, and test
+on:
+  pull_request:
+    branches:
+    - "main"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "3.11"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python -
+        poetry --version
+    - name: Install dependencies with poetry
+      run: |
+        poetry install
+    - name: Lint with flake8
+      run: |
+        poetry run flake8 crspectra tests
+    - name: Type check with mypy
+      run: |
+        poetry run mypy crspectra tests
+    - name: Test with pytest
+      run: |
+        poetry run pytest
+      if: ${{ matrix.python-version != '3.11' }}
+    - name: Test with pytest
+      run: |
+        poetry run coverage run --source=crspectra --branch -m pytest
+      if: ${{ matrix.python-version == '3.11' }}
+    - name: Create coverage report
+      run: |
+        poetry run coverage html
+      if: ${{ matrix.python-version == '3.11' }}
+    - uses: actions/upload-artifact@v3
+      with:
+        name: coverage
+        path: htmlcov
+      if: ${{ matrix.python-version == '3.11' }}
