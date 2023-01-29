@@ -1,13 +1,11 @@
-name: Execute example notebook
+name: Publish to TestPyPI
 on:
-  pull_request:
-    branches:
-    - "main"
   push:
     branches:
     - "dev"
+    - "main"
 jobs:
-  example:
+  prepublish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -22,13 +20,10 @@ jobs:
     - name: Install dependencies with poetry
       run: |
         poetry install
-    - name: Execute crspectra.ipynb with nbconvert
+    - name: Configure TestPyPI repository with poetry
       run: |
-        poetry run jupyter nbconvert \
-          --to notebook \
-          --inplace \
-          --execute example/crspectra.ipynb
-    - uses: actions/upload-artifact@v3
-      with:
-        name: example
-        path: example/crspectra.png
+        poetry config repositories.testpypi https://test.pypi.org/legacy/
+        poetry config pypi-token.testpypi ${{ secrets.TESTPYPI_TOKEN }}
+    - name: Publish to TestPyPI
+      run: |
+        poetry publish --repository testpypi --build

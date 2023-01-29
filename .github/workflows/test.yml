@@ -1,6 +1,5 @@
 name: Lint, type check, and test
 on:
-  workflow_dispatch:
   pull_request:
     branches:
     - "main"
