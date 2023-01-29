@@ -44,13 +44,10 @@ Data from the `external database`_ can be requested via:
 
    spectrum = crspectra.from_external("AMS-02")
 
-The following plot was created using this package; see the example *Jupyter
-Notebook* in *example/crspectra.ipynb*:
+The following plot was created using this package; see the `example`_ *Jupyter
+Notebook*:
 
 .. figure:: https://github.com/kkrings/crspectra/raw/main/example/crspectra.png
-
-   Cosmic-ray proton and all-particle energy spectra. Only statistical
-   uncertainties are shown.
 
 
 .. _references:
@@ -104,4 +101,4 @@ Notes
 .. _external database:
    http://lpsc.in2p3.fr/crdb/
 .. _example:
-   ./example/crspectra.ipynb
+   https://github.com/kkrings/crspectra/blob/main/example/crspectra.ipynb
