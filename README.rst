@@ -15,7 +15,7 @@ The easiest way to install this project is by using *pip*:
 
 .. code:: bash
 
-   pip install 'git+https://github.com/kkrings/crspectra#egg=crspectra'
+   pip install 'git+https://github.com/kkrings/crspectra.git@legacy#egg=crspectra'
 
 
 Getting started
