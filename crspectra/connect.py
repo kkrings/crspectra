@@ -5,7 +5,6 @@
 import contextlib
 import importlib.resources
 import logging
-import pathlib
 import sqlite3
 import typing
 
@@ -23,9 +22,7 @@ def connect() -> typing.Iterator[CRSpectra]:
         cosmic-ray energy spectra
 
     """
-    path_to_database = pathlib.Path("data", "crspectra.db")
-
-    with importlib.resources.path("crspectra", path_to_database) as database:
+    with importlib.resources.path("crspectra", "crspectra.db") as database:
         log = logging.getLogger("crspectra.connect")
         log.debug(f"Database: {database}")
 

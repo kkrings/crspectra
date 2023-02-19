@@ -1,4 +1,3 @@
-import pathlib
 import typing
 import unittest.mock
 
@@ -35,7 +34,7 @@ class TestCRSpectra:
     ) -> typing.Iterator[CRSpectra]:
         with connect() as database:
             mock_importlib_resources_path.assert_called_once_with(
-                "crspectra", pathlib.Path("data", "crspectra.db")
+                "crspectra", "crspectra.db"
             )
 
             yield database
