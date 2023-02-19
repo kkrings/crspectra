@@ -7,10 +7,13 @@ import logging
 import typing
 
 import numpy
+import numpy.typing
 import requests
 
 
-def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:
+def from_external(
+    experiment: str, element: str = "C", energy: str = "EKN"
+) -> numpy.typing.NDArray[typing.Any]:
     """Request cosmic-ray energy spectrum from external database.
 
     The database's address is http://lpsc.in2p3.fr/crdb.
@@ -69,7 +72,8 @@ def from_external(experiment: str, element="C", energy="EKN") -> numpy.ndarray:
     ]
 
     def fabs(s: str) -> float:
-        return numpy.fabs(float(s))
+        value: float = numpy.fabs(float(s))
+        return value
 
     converters: typing.Dict[typing.Union[str, int], typing.Callable[[str], float]] = {
         7: fabs,

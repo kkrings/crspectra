@@ -6,9 +6,10 @@ import sqlite3
 import typing
 
 import numpy
+import numpy.typing
 
 
-class CRSpectra(typing.Mapping[str, numpy.ndarray]):
+class CRSpectra(typing.Mapping[str, numpy.typing.NDArray[typing.Any]]):
     """Cosmic-ray energy spectra database
 
     Parameters
@@ -21,7 +22,7 @@ class CRSpectra(typing.Mapping[str, numpy.ndarray]):
     def __init__(self, connection: sqlite3.Connection) -> None:
         self._connection = connection
 
-    def __getitem__(self, experiment: str) -> numpy.ndarray:
+    def __getitem__(self, experiment: str) -> numpy.typing.NDArray[typing.Any]:
         """Request cosmic-ray energy spectrum.
 
         Parameters
@@ -76,8 +77,10 @@ class CRSpectra(typing.Mapping[str, numpy.ndarray]):
 
     def __len__(self) -> int:
         """int: Number of available cosmic-ray energy spectra"""
-        size = self._connection.execute(
+        count_tables = self._connection.execute(
             "SELECT count() FROM sqlite_master WHERE type = 'table'"
         )
 
-        return size.fetchone()[0]
+        size: int = count_tables.fetchone()[0]
+
+        return size

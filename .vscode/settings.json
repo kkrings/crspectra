@@ -13,5 +13,12 @@
     "python.linting.flake8Path": ".venv/bin/flake8",
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": ".venv/bin/mypy",
+    "python.linting.mypyArgs": [
+        "--follow-imports=silent",
+        "--ignore-missing-imports",
+        "--show-column-numbers",
+        "--no-pretty",
+        "--strict"
+    ],
     "python.linting.pylintEnabled": false
 }

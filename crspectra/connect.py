@@ -3,12 +3,10 @@
 """
 
 import contextlib
+import importlib.resources
 import logging
-import os
 import sqlite3
 import typing
-
-import pkg_resources
 
 from crspectra.crspectra import CRSpectra
 
@@ -24,12 +22,9 @@ def connect() -> typing.Iterator[CRSpectra]:
         cosmic-ray energy spectra
 
     """
-    database = pkg_resources.resource_filename(
-        "crspectra", os.path.join("data", "crspectra.db")
-    )
+    with importlib.resources.path("crspectra", "crspectra.db") as database:
+        log = logging.getLogger("crspectra.connect")
+        log.debug(f"Database: {database}")
 
-    log = logging.getLogger("crspectra.connect")
-    log.debug(f"Database: {database}")
-
-    with sqlite3.connect(database) as connection:
-        yield CRSpectra(connection)
+        with sqlite3.connect(database) as connection:
+            yield CRSpectra(connection)
