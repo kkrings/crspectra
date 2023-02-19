@@ -6,6 +6,7 @@ import typing
 import unittest.mock
 
 import numpy
+import numpy.typing
 import pytest
 import pytest_mock
 
@@ -16,7 +17,7 @@ def experiment() -> str:
 
 
 @pytest.fixture(scope="session")
-def spectrum() -> numpy.ndarray:
+def spectrum() -> numpy.typing.NDArray[typing.Any]:
     values = [
         (1e3, 1e-3, (0.5e-4, 0.5e-4), (0.25e-4, 0.25e-4), False),
         (1e4, 1e-4, (0.5e-5, 0.5e-5), (0.25e-5, 0.25e-5), False),
@@ -47,7 +48,9 @@ def connection(database: pathlib.Path) -> typing.Iterator[sqlite3.Connection]:
 
 @pytest.fixture(scope="session")
 def insert_experiment(
-    connection: sqlite3.Connection, experiment: str, spectrum: numpy.ndarray
+    connection: sqlite3.Connection,
+    experiment: str,
+    spectrum: numpy.typing.NDArray[typing.Any],
 ) -> None:
     columns = [
         "energy",
@@ -106,8 +109,8 @@ class FakeResponse:
 
 
 @pytest.fixture(scope="session")
-def response(spectrum: numpy.ndarray) -> FakeResponse:
-    def line(row: numpy.ndarray) -> str:
+def response(spectrum: numpy.typing.NDArray[typing.Any]) -> FakeResponse:
+    def line(row: numpy.typing.NDArray[typing.Any]) -> str:
         values = ["0.0"] * 16
         values[3] = f"{row['energy']:e}"
         values[6] = f"{row['flux']:e}"
