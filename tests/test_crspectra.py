@@ -1,4 +1,4 @@
-import os
+import pathlib
 import typing
 import unittest.mock
 
@@ -25,11 +25,11 @@ class TestCRSpectra:
 
     @pytest.fixture
     def spectra(
-        self, mock_pkg_resources_resource_filename: unittest.mock.MagicMock
+        self, mock_importlib_resources_path: unittest.mock.MagicMock
     ) -> typing.Iterator[crspectra.CRSpectra]:
         with crspectra.connect() as database:
-            mock_pkg_resources_resource_filename.assert_called_once_with(
-                "crspectra", os.path.join("data", "crspectra.db")
+            mock_importlib_resources_path.assert_called_once_with(
+                "crspectra", pathlib.Path("data", "crspectra.db")
             )
 
             yield database

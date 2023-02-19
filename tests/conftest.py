@@ -1,3 +1,4 @@
+import contextlib
 import dataclasses
 import pathlib
 import sqlite3
@@ -80,14 +81,19 @@ def insert_experiment(
     connection.commit()
 
 
+@contextlib.contextmanager
+def as_database_context(database: pathlib.Path) -> typing.Iterator[pathlib.Path]:
+    yield database
+
+
 @pytest.fixture
-def mock_pkg_resources_resource_filename(
+def mock_importlib_resources_path(
     mocker: pytest_mock.MockerFixture, database: pathlib.Path
 ) -> unittest.mock.MagicMock:
-    resource_filename_mock = mocker.patch("pkg_resources.resource_filename")
-    resource_filename_mock.return_value = str(database)
+    path_mock = mocker.patch("importlib.resources.path")
+    path_mock.return_value = as_database_context(database)
 
-    return resource_filename_mock
+    return path_mock
 
 
 @dataclasses.dataclass(frozen=True)
