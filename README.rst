@@ -1,7 +1,7 @@
 Cosmic-ray energy spectra
 =========================
 
-   The package is deprecated. Please use the official `CRDB Python package`_.
+   This package is deprecated. Please use the official `CRDB Python package`_.
 
 This Python package provides a database of published cosmic-ray energy spectra,
 measured by surface detectors like *IceTop* or the *Pierre Auger Observatory*;
