@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "crspectra"
-version = "1.1.0"
+version = "1.1.1"
 description = "Database of published cosmic-ray energy spectra"
 authors = ["Kai Krings <kai.krings@posteo.de>"]
 license = "GPL-3.0-only"

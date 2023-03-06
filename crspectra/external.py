@@ -14,7 +14,7 @@ import requests
 def from_external(
     experiment: str, element: str = "C", energy: str = "EKN"
 ) -> numpy.typing.NDArray[typing.Any]:
-    """Request cosmic-ray energy spectrum from external database.
+    """Request cosmic-ray energy spectrum from Cosmic-Ray DataBase (CRDB).
 
     The database's address is http://lpsc.in2p3.fr/crdb.
     It includes electrons, positrons, anti-protons, and nuclides up
