@@ -12,7 +12,7 @@ Connect to the cosmic-ray energy spectra database.
 ...     for experiment in database:
 ...         spectrum = database[experiment]
 
-Request data from external database.
+Request data from Cosmic-Ray DataBase (CRDB).
 
 >>> import crspectra
 >>> spectrum = crspectra.from_external("AMS-02")

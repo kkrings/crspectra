@@ -3,9 +3,9 @@ Cosmic-ray energy spectra
 
 This Python package provides a database of published cosmic-ray energy spectra,
 measured by surface detectors like *IceTop* or the *Pierre Auger Observatory*;
-see references_. Moreover, it gives access to an `external database`_, which
-includes electrons, positrons, anti-protons, and nuclide up to ``Z = 30`` for
-energies below the cosmic-ray *knee*.
+see references_. Moreover, it gives access to the `Cosmic-Ray DataBase (CRDB)`_,
+which includes electrons, positrons, anti-protons, and nuclide up to ``Z = 30``
+for energies below the cosmic-ray *knee*.
 
 
 Installation
@@ -38,11 +38,13 @@ limit ``uplim``. The energy is given in ``GeV`` and the flux is given
 in ``GeV^-1 m^-2 s^-1 sr^-1``. The uncertainties describe the lower and upper
 uncertainty relative to the flux.
 
-Data from the `external database`_ can be requested via:
+Data from CRDB can be requested via:
 
 .. code:: python
 
    spectrum = crspectra.from_external("AMS-02")
+
+Note that CRDB also provides the papers that should be citied.
 
 The following plot was created using this package; see the `example`_ *Jupyter
 Notebook*:
@@ -88,6 +90,12 @@ KASCADE-Grande
 Tibet-III
    Amenomori et al., The Astrophysical Journal 678 (2008), pp. 1165-1179
 
+CRDB
+   Maurin et al., Astronomy & Astrophysics 569 (2014), A32
+
+CRDB Update
+   Maurin et al., Universe 6 (2020) 8, 102
+
 
 Notes
 -----
@@ -98,7 +106,7 @@ Notes
 
 
 .. Links
-.. _external database:
+.. _`Cosmic-Ray DataBase (CRDB)`_:
    http://lpsc.in2p3.fr/crdb/
 .. _example:
    https://github.com/kkrings/crspectra/blob/main/example/crspectra.ipynb
