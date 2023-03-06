@@ -93,7 +93,7 @@ Tibet-III
 CRDB
    Maurin et al., Astronomy & Astrophysics 569 (2014), A32
 
-CRDB Update
+CRDB v4.0
    Maurin et al., Universe 6 (2020) 8, 102
 
 
@@ -106,7 +106,7 @@ Notes
 
 
 .. Links
-.. _`Cosmic-Ray DataBase (CRDB)`_:
+.. _Cosmic-Ray DataBase (CRDB):
    http://lpsc.in2p3.fr/crdb/
 .. _example:
    https://github.com/kkrings/crspectra/blob/main/example/crspectra.ipynb
